@@ -1,63 +1,17 @@
 <template>
   <div class="app">
-    <form class="post__form">
-      <h4>Создание поста</h4>
-      <input
-        class="post__input"
-        type="text"
-        placeholder="Название поста"
-        v-bind:value="post_title"
-        v-on:input="post_title = $event.target.value"
-      />
-      <input
-        class="post__input"
-        type="text"
-        placeholder="Содержание поста"
-        v-bind:value="post_content"
-        v-on:input="post_content = $event.target.value"
-      />
-      <button
-        class="post__button"
-        type="submit"
-        v-on:click.prevent="createPost"
-      >
-        Добавить пост
-      </button>
-    </form>
-
-    <div v-for="post in posts" v-bind:key="post.id">
-      <div class="post">
-        <div>
-          <strong>{{ post.title }}:</strong>
-        </div>
-        <div>{{ post.content }}</div>
-        <div class="post__buttons">
-          <div>
-            <button class="post__button post__button_like" v-on:click="addLike">
-              Like
-            </button>
-            <div>
-              Количество лайков: <strong>{{ likes }}</strong>
-            </div>
-          </div>
-          <div>
-            <button
-              class="post__button post__button_dislike"
-              v-on:click="addDislike"
-            >
-              DisLike
-            </button>
-            <div>
-              Количество дизлайков: <strong>{{ dislikes }}</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <post-form></post-form>
+    <post-list :posts="posts"></post-list>
   </div>
 </template>
 <script>
+import PostForm from "@/components/PostForm.vue";
+import PostList from "@/components/PostList.vue";
 export default {
+  components: {
+    PostForm,
+    PostList,
+  },
   data() {
     return {
       likes: 0,
@@ -131,17 +85,5 @@ export default {
 }
 .post__button_dislike {
   background: red;
-}
-.post__form {
-  display: flex;
-  flex-direction: column;
-  border: 3px solid teal;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-.post__input {
-  border: 1px solid teal;
-  padding: 5px;
-  margin-top: 10px;
 }
 </style>
