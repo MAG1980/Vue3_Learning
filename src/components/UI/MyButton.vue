@@ -2,7 +2,9 @@
   <button class="button"><slot></slot></button>
 </template>
 <script>
-export default {};
+export default {
+  name: "MyButton",
+};
 </script>
 <style scoped>
 .button {
