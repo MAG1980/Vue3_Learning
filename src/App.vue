@@ -7,14 +7,14 @@
         type="text"
         placeholder="Название поста"
         v-bind:value="post_title"
-        v-on:input="inputTitle"
+        v-on:input="post_title = $event.target.value"
       />
       <input
         class="post__input"
         type="text"
         placeholder="Содержание поста"
         v-bind:value="post_content"
-        v-on:input="inputContent"
+        v-on:input="post_content = $event.target.value"
       />
       <button
         class="post__button"
@@ -90,12 +90,7 @@ export default {
     addDislike() {
       this.dislikes += 1;
     },
-    inputTitle(e) {
-      this.post_title = e.target.value;
-    },
-    inputContent(e) {
-      this.post_content = e.target.value;
-    },
+
     createPost() {
       this.posts.push({
         id: Date.now(),
