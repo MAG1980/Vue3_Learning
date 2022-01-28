@@ -2,9 +2,27 @@
   <div class="app">
     <form class="post__form">
       <h4>Создание поста</h4>
-      <input class="post__input" type="text" placeholder="Название поста" />
-      <input class="post__input" type="text" placeholder="Содержание поста" />
-      <button class="post__button" type="submit">Добавить пост</button>
+      <input
+        class="post__input"
+        type="text"
+        placeholder="Название поста"
+        v-bind:value="post_title"
+        v-on:input="inputTitle"
+      />
+      <input
+        class="post__input"
+        type="text"
+        placeholder="Содержание поста"
+        v-bind:value="post_content"
+        v-on:input="inputContent"
+      />
+      <button
+        class="post__button"
+        type="submit"
+        v-on:click.prevent="createPost"
+      >
+        Добавить пост
+      </button>
     </form>
 
     <div v-for="post in posts" v-bind:key="post.id">
@@ -44,6 +62,8 @@ export default {
     return {
       likes: 0,
       dislikes: 5,
+      post_title: "",
+      post_content: "",
       posts: [
         {
           id: 1,
@@ -70,6 +90,21 @@ export default {
     addDislike() {
       this.dislikes += 1;
     },
+    inputTitle(e) {
+      this.post_title = e.target.value;
+    },
+    inputContent(e) {
+      this.post_content = e.target.value;
+    },
+    createPost() {
+      this.posts.push({
+        id: Date.now(),
+        title: this.post_title,
+        content: this.post_content,
+      });
+      this.post_title = "";
+      this.post_content = "";
+    },
   },
 };
 </script>
@@ -94,6 +129,7 @@ export default {
 .post__button {
   padding: 5px 10px;
   margin: 10px 0;
+  border-radius: 5px;
 }
 .post__button_like {
   background: teal;
