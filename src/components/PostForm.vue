@@ -13,7 +13,7 @@
       placeholder="Содержание поста"
       v-model="post.content"
     />
-    <button class="post__button" type="submit" v-on:click.prevent="createPost">
+    <button class="post__button" type="submit" @click.prevent="createPost">
       Добавить пост
     </button>
   </form>
@@ -28,6 +28,16 @@ export default {
         content: "",
       },
     };
+  },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit("create-post", this.post);
+      this.post = {
+        title: "",
+        content: "",
+      };
+    },
   },
 };
 </script>

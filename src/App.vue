@@ -1,6 +1,7 @@
 <template>
   <div class="app">
-    <post-form></post-form>
+    <post-form @create-post="addPost"></post-form>
+    <!-- <post-form @create-post="this.posts.push(post)"></post-form> -->
     <post-list :posts="posts"></post-list>
   </div>
 </template>
@@ -44,15 +45,8 @@ export default {
     addDislike() {
       this.dislikes += 1;
     },
-
-    createPost() {
-      this.posts.push({
-        id: Date.now(),
-        title: this.post_title,
-        content: this.post_content,
-      });
-      this.post_title = "";
-      this.post_content = "";
+    addPost(post) {
+      this.posts.push(post);
     },
   },
 };
