@@ -5,15 +5,13 @@
       class="post__input"
       type="text"
       placeholder="Название поста"
-      :value="post.title"
-      @input="post.title = $event.target.value"
+      v-model="post.title"
     />
     <input
       class="post__input"
       type="text"
       placeholder="Содержание поста"
-      :value="post.content"
-      @input="post.content = $event.target.value"
+      v-model="post.content"
     />
     <button class="post__button" type="submit" v-on:click.prevent="createPost">
       Добавить пост
