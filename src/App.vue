@@ -52,24 +52,4 @@ export default {
 .app {
   padding: 20px;
 }
-.post {
-  padding: 15px;
-  border: 3px solid teal;
-  margin-bottom: 10px;
-}
-.post__buttons {
-  display: flex;
-  justify-content: space-around;
-}
-.post__button {
-  padding: 5px 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-}
-.post__button_like {
-  background: teal;
-}
-.post__button_dislike {
-  background: red;
-}
 </style>

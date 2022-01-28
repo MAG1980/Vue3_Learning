@@ -6,31 +6,45 @@
     <div>{{ post.content }}</div>
     <div class="post__buttons">
       <div>
-        <button class="post__button post__button_like" @click="addLike">
+        <MyButton class="post__button post__button_like" @click="addLike">
           Like
-        </button>
+        </MyButton>
         <div>
           Количество лайков: <strong>{{ likes }}</strong>
         </div>
       </div>
       <div>
-        <button class="post__button post__button_dislike" @click="addDislike">
+        <MyButton class="post__button post__button_dislike" @click="addDislike">
           DisLike
-        </button>
+        </MyButton>
         <div>
           Количество дизлайков: <strong>{{ dislikes }}</strong>
         </div>
+      </div>
+    </div>
+    <div>
+      <div class="edit__buttons">
+        <MyButton class="post__button edit__button_change" @click="addDislike">
+          Изменить
+        </MyButton>
+        <MyButton class="post__button edit__button_delete" @click="addDislike">
+          Удалить
+        </MyButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton.vue";
 export default {
+  components: {
+    MyButton,
+  },
   props: {
     post: {
-      title: String,
-      content: String,
+      type: Object,
+      required: true,
     },
   },
   data() {
@@ -49,3 +63,30 @@ export default {
   },
 };
 </script>
+<style scoped>
+.post {
+  padding: 15px;
+  border: 3px solid teal;
+  margin-bottom: 10px;
+}
+.post__buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.post__button_like {
+  background: teal;
+}
+.post__button_dislike {
+  background: red;
+}
+.edit__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.edit__button_change {
+  background: royalblue;
+}
+.edit__button_delete {
+  background: red;
+}
+</style>

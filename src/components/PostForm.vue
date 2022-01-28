@@ -13,14 +13,18 @@
       placeholder="Содержание поста"
       v-model="post.content"
     />
-    <button class="post__button" type="submit" @click.prevent="createPost">
+    <MyButton type="submit" @click.prevent="createPost">
       Добавить пост
-    </button>
+    </MyButton>
   </form>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton.vue";
 export default {
+  components: {
+    MyButton,
+  },
   data() {
     return {
       post: {
