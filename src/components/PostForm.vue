@@ -5,13 +5,13 @@
       class="post__input"
       :type="'text'"
       placeholder="Название поста"
-      v-model="post.title"
+      v-model:value="post.title"
     />
     <MyInput
       class="post__input"
       :type="'text'"
       placeholder="Содержание поста"
-      v-model="post.content"
+      v-model:value="post.content"
     />
     <MyButton type="submit" @click.prevent="createPost">
       Добавить пост
