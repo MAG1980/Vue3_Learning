@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <h3 class="title">Список постов</h3>
-    <div v-for="post in posts" v-bind:key="post.id">
+    <div v-for="post in posts" :key="post.id">
       <PostItem :post="post" />
     </div>
   </div>

@@ -1,15 +1,15 @@
 <template>
   <form class="post__form" v-on:submit.prevent>
     <h4>Создание поста</h4>
-    <input
+    <MyInput
       class="post__input"
-      type="text"
+      :type="'text'"
       placeholder="Название поста"
       v-model="post.title"
     />
-    <input
+    <MyInput
       class="post__input"
-      type="text"
+      :type="'text'"
       placeholder="Содержание поста"
       v-model="post.content"
     />
@@ -49,10 +49,5 @@ export default {
   border: 3px solid teal;
   margin-bottom: 10px;
   padding: 10px;
-}
-.post__input {
-  border: 1px solid teal;
-  padding: 5px;
-  margin-top: 10px;
 }
 </style>
