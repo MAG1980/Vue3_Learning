@@ -15,8 +15,6 @@ export default {
   },
   data() {
     return {
-      likes: 0,
-      dislikes: 5,
       post_title: "",
       post_content: "",
       posts: [
@@ -39,12 +37,6 @@ export default {
     };
   },
   methods: {
-    addLike() {
-      this.likes += 1;
-    },
-    addDislike() {
-      this.dislikes += 1;
-    },
     addPost(post) {
       this.posts.push(post);
     },
