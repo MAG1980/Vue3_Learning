@@ -1,13 +1,17 @@
 <template>
   <div class="app">
     <h1>Страница с постами</h1>
-    <MyButton @click="fetchPosts">Download Posts</MyButton>
+    <p v-if="isPostsLoading">Идёт загрузка!</p>
     <MyButton @click="showDialog">Создать пост</MyButton>
     <MyDialog v-model:show="dialogVisible">
       <post-form @create-post="addPost"></post-form>
       <!-- <post-form @create-post="this.posts.push(post)"></post-form> -->
     </MyDialog>
-    <post-list :posts="posts" @remove="removePost"></post-list>
+    <post-list
+      :posts="posts"
+      @remove="removePost"
+      v-if="!isPostsLoading"
+    ></post-list>
   </div>
 </template>
 <script>
@@ -25,6 +29,7 @@ export default {
       post_title: "",
       post_content: "",
       posts: [],
+      isPostsLoading: false,
     };
   },
   methods: {
@@ -47,11 +52,16 @@ export default {
           "https://jsonplaceholder.typicode.com/posts?_limit=10"
         );
         this.posts = response.data;
+        this.isPostsLoading = false;
         console.log(response);
       } catch (e) {
         console.log(e);
       }
     },
+  },
+  mounted() {
+    this.isPostsLoading = true;
+    setTimeout(() => this.fetchPosts(), 2000);
   },
 };
 </script>
