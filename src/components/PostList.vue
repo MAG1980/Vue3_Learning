@@ -1,5 +1,5 @@
 <template>
-  <div class="box" v-if="posts.length !== 0">
+  <div class="box" v-show="posts.length">
     <h3 class="title">Список постов</h3>
     <PostItem
       v-for="post in posts"
@@ -8,7 +8,7 @@
       @remove="$emit('remove', post)"
     />
   </div>
-  <div v-else>
+  <div v-show="!posts.length">
     <h3 class="title title_error">Список постов пуст</h3>
   </div>
 </template>
