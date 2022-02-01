@@ -12,7 +12,7 @@
       <!-- <post-form @create-post="this.posts.push(post)"></post-form> -->
     </MyDialog>
     <post-list
-      :posts="posts"
+      :posts="sortedPosts"
       @remove="removePost"
       v-if="!isPostsLoading"
     ></post-list>
@@ -70,9 +70,17 @@ export default {
     },
   },
   watch: {
-    selectedSort(newValue) {
-      console.log(newValue);
-      this.posts.sort((post1, post2) => {
+    // newValue - значение selectedSort после изменения
+    // selectedSort(newValue) {
+    //   console.log(newValue);
+    //   this.posts.sort((post1, post2) => {
+    //     return post1[newValue]?.localeCompare(post2[newValue]);
+    //   });
+    // },
+  },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
         return post1[this.selectedSort]?.localeCompare(
           post2[this.selectedSort]
         );
