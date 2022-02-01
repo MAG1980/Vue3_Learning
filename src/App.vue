@@ -72,6 +72,11 @@ export default {
   watch: {
     selectedSort(newValue) {
       console.log(newValue);
+      this.posts.sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(
+          post2[this.selectedSort]
+        );
+      });
     },
   },
   mounted() {
