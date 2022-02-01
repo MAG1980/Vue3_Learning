@@ -1,7 +1,7 @@
 <template>
   <div class="post">
     <div>
-      <strong>{{ post.title }}:</strong>
+      <strong>{{ post.id }}: {{ post.title }}:</strong>
     </div>
     <div>{{ post.content }}</div>
     <div class="post__buttons">

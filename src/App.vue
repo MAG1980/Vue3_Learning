@@ -18,6 +18,7 @@
         :class="{ page__number_current: page === pageNumber }"
         v-for="pageNumber in totalPages"
         :key="pageNumber"
+        @click="changePage(pageNumber)"
       >
         {{ pageNumber }}
       </div>
@@ -92,8 +93,14 @@ export default {
       } finally {
       }
     },
+    changePage(pageNumber) {
+      this.page = pageNumber;
+    },
   },
   watch: {
+    page() {
+      this.fetchPosts();
+    },
     // newValue - значение selectedSort после изменения
     // selectedSort(newValue) {
     //   console.log(newValue);
