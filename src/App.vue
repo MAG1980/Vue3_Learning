@@ -12,6 +12,16 @@
       <post-form @create-post="addPost"></post-form>
       <!-- <post-form @create-post="this.posts.push(post)"></post-form> -->
     </MyDialog>
+    <div class="page__wrapper">
+      <div
+        class="page__number"
+        :class="{ page__number_current: page === pageNumber }"
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
     <post-list
       :posts="sortedSearchedPosts"
       @remove="removePost"
@@ -41,6 +51,9 @@ export default {
         { value: "body", name: "По содержимому" },
       ],
       searchQuery: "",
+      page: 1,
+      limit: 10,
+      totalPages: 0,
     };
   },
   methods: {
@@ -61,7 +74,16 @@ export default {
       this.isPostsLoading = true;
       try {
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
         this.isPostsLoading = false;
@@ -114,5 +136,16 @@ export default {
   margin: 15px 0;
   display: flex;
   justify-content: space-between;
+}
+.page__wrapper {
+  display: flex;
+  margin: 15px 0;
+}
+.page__number {
+  border: 1px solid blue;
+  padding: 7px 10px;
+}
+.page__number_current {
+  border: 2px solid green;
 }
 </style>
