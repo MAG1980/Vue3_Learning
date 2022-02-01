@@ -63,11 +63,15 @@ export default {
         );
         this.posts = response.data;
         this.isPostsLoading = false;
-        console.log(response);
       } catch (e) {
         console.log(e);
       } finally {
       }
+    },
+  },
+  watch: {
+    selectedSort(newValue) {
+      console.log(newValue);
     },
   },
   mounted() {
