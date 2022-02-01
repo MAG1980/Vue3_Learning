@@ -27,7 +27,10 @@
         <MyButton class="post__button edit__button_change" @click="addDislike">
           Изменить
         </MyButton>
-        <MyButton class="post__button edit__button_delete" @click="addDislike">
+        <MyButton
+          class="post__button edit__button_delete"
+          @click="$emit('remove', post)"
+        >
           Удалить
         </MyButton>
       </div>

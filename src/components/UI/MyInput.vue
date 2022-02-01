@@ -6,7 +6,7 @@ export default {
   name: "MyInput",
   props: {
     type: String,
-    modelValue: [String, Number],
+    // modelValue: [String, Number],
     value: String,
   },
   methods: {

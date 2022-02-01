@@ -2,13 +2,11 @@
   <form class="post__form" v-on:submit.prevent>
     <h4>Создание поста</h4>
     <MyInput
-      class="post__input"
       :type="'text'"
       placeholder="Название поста"
       v-model:value="post.title"
     />
     <MyInput
-      class="post__input"
       :type="'text'"
       placeholder="Содержание поста"
       v-model:value="post.content"
