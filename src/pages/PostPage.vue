@@ -40,6 +40,7 @@ import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
 import axios from "axios";
 export default {
+  name: "PostPage",
   components: {
     PostForm,
     PostList,

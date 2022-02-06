@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Main from "@/pages/Main";
-import PostPage from "@/pages/PostPage";
+import { Main, PostPage } from "@/pages/index.js";
 
 const routes = [
   {
