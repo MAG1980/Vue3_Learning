@@ -1,4 +1,5 @@
 import Main from "@/pages/Main.vue";
-import PostPage from "@/pages/PostPage.vue";
+import PostsPage from "@/pages/PostsPage.vue";
 import About from "@/pages/About.vue";
-export { Main, PostPage, About };
+import PostItemPage from "@/pages/PostItemPage.vue";
+export { Main, PostsPage, PostItemPage, About };

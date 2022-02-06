@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { Main, PostPage, About } from "@/pages/index.js";
+import { Main, PostsPage, PostItemPage, About } from "@/pages/index.js";
 
 export const routes = [
   {
@@ -9,13 +9,17 @@ export const routes = [
   },
   {
     path: "/posts",
-    component: PostPage,
+    component: PostsPage,
     title: "Posts page"
   },
   {
     path: "/about",
     component: About,
     title: "About page"
+  },
+  {
+    path: "/posts/:id",
+    component: PostItemPage
   }
 ];
 

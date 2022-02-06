@@ -24,8 +24,11 @@
     </div>
     <div>
       <div class="edit__buttons">
-        <MyButton class="post__button edit__button_change" @click="addDislike">
-          Редактировать
+        <MyButton
+          class="post__button edit__button_change"
+          @click="$router.push(`/posts/${post.id}`)"
+        >
+          Открыть
         </MyButton>
         <MyButton
           class="post__button edit__button_delete"
