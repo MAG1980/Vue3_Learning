@@ -12,7 +12,7 @@
       <post-form @create-post="addPost"></post-form>
       <!-- <post-form @create-post="this.posts.push(post)"></post-form> -->
     </MyDialog>
-    <div class="page__wrapper">
+    <!-- <div class="page__wrapper">
       <div
         class="page__number"
         :class="{ page__number_current: page === pageNumber }"
@@ -22,12 +22,17 @@
       >
         {{ pageNumber }}
       </div>
-    </div>
+    </div> -->
     <post-list
       :posts="sortedSearchedPosts"
       @remove="removePost"
       v-if="!isPostsLoading"
     ></post-list>
+
+    <!-- Слежение за появлением данного div в области видимости
+    с помощью ref
+    для бесконечной подгрузки постов -->
+    <div ref="observer" class="observer"></div>
   </div>
 </template>
 <script>
@@ -87,20 +92,48 @@ export default {
           response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
-        this.isPostsLoading = false;
       } catch (e) {
         console.log(e);
       } finally {
+        this.isPostsLoading = false;
       }
     },
-    changePage(pageNumber) {
-      this.page = pageNumber;
+    // changePage(pageNumber) {
+    //   this.page = pageNumber;
+    // },
+    async loadMorePosts() {
+      // Если изменять значение isPostsLoading,
+      //будет происходить перерисовака UI
+      // и "прыжок" к месту её отображения
+      // this.isPostsLoading = true;
+      try {
+        // Для подгрузки следующего блока постов
+        this.page += 1;
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
+        );
+        //В отличие от fetchPosts новые посты не перезаписывают старые,
+        // а добавляются в конец массива.
+        this.posts = [...this.posts, ...response.data];
+        // this.isPostsLoading = false;
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
   watch: {
-    page() {
-      this.fetchPosts();
-    },
+    // page() {
+    //   this.fetchPosts();
+    // },
     // newValue - значение selectedSort после изменения
     // selectedSort(newValue) {
     //   console.log(newValue);
@@ -126,7 +159,30 @@ export default {
   },
   mounted() {
     this.isPostsLoading = true;
+    // Симуляция задержки ответа сервера
     setTimeout(() => this.fetchPosts(), 2000);
+
+    //Слежение за текущей границей постов для бесконечной подгрузки
+    const options = {
+      root: document.querySelector("#scrollArea"),
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+
+    //Без использования стрелочной ф-ции происходит потеря контекста
+    //и метод loadMorePosts() становится недоступным
+    const callback = (entries, observer) => {
+      //Контроль за моментом появления div observer в области видимости
+      //Чтобы callback не вызывалась  при выходе div observer за пределы видимости
+      //а также при исчерпании данных на сервере
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        this.loadMorePosts();
+        console.log("Is called!");
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    //Указываю элемент, за появлением которого нужно следить
+    observer.observe(this.$refs.observer);
   },
 };
 </script>

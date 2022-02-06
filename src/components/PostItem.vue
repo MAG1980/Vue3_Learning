@@ -25,7 +25,7 @@
     <div>
       <div class="edit__buttons">
         <MyButton class="post__button edit__button_change" @click="addDislike">
-          Изменить
+          Редактировать
         </MyButton>
         <MyButton
           class="post__button edit__button_delete"
