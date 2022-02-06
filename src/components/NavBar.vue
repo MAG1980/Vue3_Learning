@@ -1,11 +1,15 @@
 <template>
   <nav class="navbar">
-    <div>Vue 3</div>
+    <div class="navbar__logo" @click="$router.push('/')">Vue 3</div>
     <div class="navbar__buttons">
-      <my-button class="navbar__button navbar__button_first"
+      <my-button
+        class="navbar__button navbar__button_first"
+        @click="$router.push('/posts')"
         >Список постов</my-button
       >
-      <my-button class="navbar__button">About</my-button>
+      <my-button class="navbar__button" @click="$router.push('/about')"
+        >About</my-button
+      >
     </div>
   </nav>
 </template>
@@ -20,6 +24,10 @@ export default {};
   display: flex;
   align-items: center;
   padding: 0 15px;
+}
+.navbar__logo {
+  color: white;
+  font-size: 20px;
 }
 .navbar__buttons {
   margin-left: auto;
