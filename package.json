@@ -9,11 +9,10 @@
   },
   "dependencies": {
     "@vue/cli-plugin-vuex": "4.5.15",
-    "@web-types/vue-router": "3.1.0-1",
     "axios": "0.25.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0-0",
-    "vue-router": "3.5.3",
+    "vue-router": "4.0.12",
     "vuex": "3.6.2"
   },
   "devDependencies": {
