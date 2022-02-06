@@ -1,18 +1,21 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { Main, PostPage, About } from "@/pages/index.js";
 
-const routes = [
+export const routes = [
   {
     path: "/",
-    component: Main
+    component: Main,
+    title: "Main page"
   },
   {
     path: "/posts",
-    component: PostPage
+    component: PostPage,
+    title: "Posts page"
   },
   {
     path: "/about",
-    component: About
+    component: About,
+    title: "About page"
   }
 ];
 
