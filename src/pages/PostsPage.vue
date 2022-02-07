@@ -30,9 +30,9 @@
     ></post-list>
 
     <!-- Слежение за появлением данного div в области видимости
-    с помощью ref
+    с помощью пользовательской директивы
     для бесконечной подгрузки постов -->
-    <div v-intersection="loadMorePosts" class="observer"></div>
+    <div v-Intersection="loadMorePosts" class="observer"></div>
   </div>
 </template>
 <script>
@@ -40,7 +40,7 @@ import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
 import axios from "axios";
 export default {
-  name: "PostPage",
+  name: "PostsPage",
   components: {
     PostForm,
     PostList,

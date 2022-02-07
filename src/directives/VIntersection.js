@@ -1,4 +1,5 @@
 export default {
+  name: "Intersection",
   updated(el, binding) {
     console.log(el, binding);
     //Слежение за текущей границей постов для бесконечной подгрузки
