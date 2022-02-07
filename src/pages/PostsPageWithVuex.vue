@@ -1,6 +1,11 @@
 <template>
   <div class="app">
-    <h1>Страница с постами</h1>
+    <h1 class="app__title">Страница с постами</h1>
+    <h2>
+      {{
+        $store.state.isAuth ? "Авторизация успешна!" : "Требуется авторизация!"
+      }}
+    </h2>
     <MyInput v-Focus v-model:value="searchQuery" placeholder="Поиск..." />
     <div class="app__buttons">
       <MyButton @click="showDialog">Создать пост</MyButton>
@@ -173,6 +178,9 @@ export default {
 }
 .app {
   padding: 20px;
+}
+.app__title {
+  margin-bottom: 15px;
 }
 .app__buttons {
   margin: 15px 0;
