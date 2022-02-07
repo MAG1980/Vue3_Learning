@@ -4,6 +4,11 @@
     <div class="navbar__buttons">
       <my-button
         class="navbar__button navbar__button_first"
+        @click="$router.push('/store')"
+        >Posts Page with Vuex</my-button
+      >
+      <my-button
+        class="navbar__button navbar__button_first"
         @click="$router.push('/posts')"
         >Список постов</my-button
       >

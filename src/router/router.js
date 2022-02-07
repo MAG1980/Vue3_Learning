@@ -1,5 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { Main, PostsPage, PostItemPage, About } from "@/pages/index.js";
+import {
+  Main,
+  PostsPage,
+  PostItemPage,
+  About,
+  PostsPageWithVuex
+} from "@/pages/index.js";
 
 export const routes = [
   {
@@ -20,6 +26,11 @@ export const routes = [
   {
     path: "/posts/:id",
     component: PostItemPage
+  },
+  {
+    path: "/store",
+    component: PostsPageWithVuex,
+    title: "Posts Page with Vuex"
   }
 ];
 
