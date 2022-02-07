@@ -32,7 +32,7 @@
     <!-- Слежение за появлением данного div в области видимости
     с помощью ref
     для бесконечной подгрузки постов -->
-    <div ref="observer" class="observer"></div>
+    <div v-intersection="loadMorePosts" class="observer"></div>
   </div>
 </template>
 <script>
@@ -158,32 +158,10 @@ export default {
       );
     },
   },
-  mounted() {
+  created() {
     this.isPostsLoading = true;
     // Симуляция задержки ответа сервера
     setTimeout(() => this.fetchPosts(), 2000);
-
-    //Слежение за текущей границей постов для бесконечной подгрузки
-    const options = {
-      root: document.querySelector("#scrollArea"),
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-
-    //Без использования стрелочной ф-ции происходит потеря контекста
-    //и метод loadMorePosts() становится недоступным
-    const callback = (entries, observer) => {
-      //Контроль за моментом появления div observer в области видимости
-      //Чтобы callback не вызывалась  при выходе div observer за пределы видимости
-      //а также при исчерпании данных на сервере
-      if (entries[0].isIntersecting && this.page < this.totalPages) {
-        this.loadMorePosts();
-        console.log("Is called!");
-      }
-    };
-    const observer = new IntersectionObserver(callback, options);
-    //Указываю элемент, за появлением которого нужно следить
-    observer.observe(this.$refs.observer);
   },
 };
 </script>
