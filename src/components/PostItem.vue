@@ -4,6 +4,12 @@
       <strong>{{ post.id }}: {{ post.title }}:</strong>
     </div>
     <div>{{ post.content }}</div>
+    <div>Количество "лайков": {{ $store.state.likes }}</div>
+    <div>
+      Двойное количество "лайков": {{ $store.getters.doubleLikes }}
+      <MyButton @click="$store.commit('incrementLikes')">+</MyButton>
+      <MyButton @click="$store.commit('decrementLikes')">-</MyButton>
+    </div>
     <div class="post__buttons">
       <div>
         <MyButton class="post__button post__button_like" @click="addLike">
