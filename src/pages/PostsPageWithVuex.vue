@@ -1,32 +1,35 @@
 <template>
   <h1>{{ $store.state.posts.limit }}</h1>
-  <!-- <div class="app">
+  <div class="app">
     <h1 class="app__title">Страница с постами</h1>
     <h2>
       {{
         $store.state.isAuth ? "Авторизация успешна!" : "Требуется авторизация!"
       }}
     </h2>
-    <MyInput v-Focus v-model:value="searchQuery" placeholder="Поиск..." />
+    <!-- <MyInput v-Focus v-model:value="searchQuery" placeholder="Поиск..." /> -->
     <div class="app__buttons">
       <MyButton @click="showDialog">Создать пост</MyButton>
-      <MySelect v-model="selectedSort" :options="sortOptions" />
+      <!-- <MySelect v-model="selectedSort" :options="sortOptions" /> -->
     </div>
     <p v-if="isPostsLoading">Идёт загрузка!</p>
 
     <MyDialog v-model:show="dialogVisible">
       <post-form @create-post="addPost"></post-form>
-       <post-list
+    </MyDialog>
+    <post-list
       :posts="sortedSearchedPosts"
       @remove="removePost"
       v-if="!isPostsLoading"
     ></post-list>
+
     <div v-Intersection="loadMorePosts" class="observer"></div>
-  </div> -->
+  </div>
 </template>
 <script>
 import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   name: "PostsPage",
   components: {
@@ -35,22 +38,17 @@ export default {
   },
   data() {
     return {
-      post_title: "",
-      post_content: "",
-      posts: [],
-      isPostsLoading: false,
-      selectedSort: "",
-      sortOptions: [
-        { value: "title", name: "По заголовку" },
-        { value: "body", name: "По содержимому" },
-      ],
-      searchQuery: "",
-      page: 1,
-      limit: 10,
-      totalPages: 0,
+      dialogVisible: false,
     };
   },
   methods: {
+    ...mapActions("posts", ["fetchPosts", "loadMorePosts"]),
+    // ...mapActions(
+    //   { loadMorePosts: "posts/loadMorePosts" },
+    //   { fetchPosts: "posts/fetchPosts" }
+    // ),
+    ...mapMutations("posts", ["setPage"]),
+
     // addPost(post) {
     //   this.posts.push(post);
     //   this.hideDialog();
@@ -80,11 +78,24 @@ export default {
     //   });
     // },
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      posts: (state) => state.posts.posts,
+      isPostsLoading: (state) => state.posts.isPostsLoading,
+      selectedSort: (state) => state.posts.selectedSort,
+      sortOptions: (state) => state.posts.sortOptions,
+      searchQuery: (state) => state.posts.searchQuery,
+      page: (state) => state.posts.page,
+      limit: (state) => state.posts.limit,
+      totalPages: (state) => state.posts.totalPages,
+    }),
+    ...mapGetters({
+      sortedPosts: "posts/sortedPosts",
+      sortedSearchedPosts: "posts/sortedSearchedPosts",
+    }),
+  },
   mounted() {
-    // this.isPostsLoading = true;
-    // Симуляция задержки ответа сервера
-    // setTimeout(() => this.fetchPosts(), 2000);
+    this.fetchPosts();
   },
 };
 </script>

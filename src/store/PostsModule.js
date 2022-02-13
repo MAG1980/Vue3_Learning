@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const postsModule = {
+  namespaced: true,
   state: () => ({
     posts: [],
     isPostsLoading: false,
@@ -16,7 +17,7 @@ export const postsModule = {
   }),
   getters: {
     sortedPosts(state) {
-      return [state.posts].sort((post1, post2) => {
+      return [...state.posts].sort((post1, post2) => {
         return post1[state.selectedSort]?.localeCompare(
           post2[state.selectedSort]
         );

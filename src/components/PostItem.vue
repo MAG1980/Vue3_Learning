@@ -77,15 +77,31 @@ export default {
   border: 3px solid teal;
   margin-bottom: 10px;
 }
+.post__button {
+  transition: 0.3s;
+  color: white;
+  cursor: pointer;
+}
+.post__button:hover {
+  background: white;
+}
 .post__buttons {
   display: flex;
   justify-content: space-around;
 }
 .post__button_like {
   background: teal;
+  border: 1px solid teal;
+}
+.post__button_like:hover {
+  color: teal;
 }
 .post__button_dislike {
+  border: 1px solid red;
   background: red;
+}
+.post__button_dislike:hover {
+  color: red;
 }
 .edit__buttons {
   display: flex;
@@ -94,7 +110,13 @@ export default {
 .edit__button_change {
   background: royalblue;
 }
+.edit__button_change:hover {
+  color: royalblue;
+}
 .edit__button_delete {
   background: red;
+}
+.edit__button_delete:hover {
+  color: red;
 }
 </style>
