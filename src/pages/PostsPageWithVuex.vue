@@ -1,12 +1,7 @@
 <template>
-  <h1>{{ $store.state.posts.limit }}</h1>
   <div class="app">
-    <h1 class="app__title">Страница с постами</h1>
-    <h2>
-      {{
-        $store.state.isAuth ? "Авторизация успешна!" : "Требуется авторизация!"
-      }}
-    </h2>
+    <h1 class="app__title">Страница с постами из Vuex</h1>
+
     <!-- <MyInput v-Focus v-model:value="searchQuery" placeholder="Поиск..." /> -->
     <div class="app__buttons">
       <MyButton @click="showDialog">Создать пост</MyButton>
@@ -79,20 +74,17 @@ export default {
     // },
   },
   computed: {
-    ...mapState({
-      posts: (state) => state.posts.posts,
-      isPostsLoading: (state) => state.posts.isPostsLoading,
-      selectedSort: (state) => state.posts.selectedSort,
-      sortOptions: (state) => state.posts.sortOptions,
-      searchQuery: (state) => state.posts.searchQuery,
-      page: (state) => state.posts.page,
-      limit: (state) => state.posts.limit,
-      totalPages: (state) => state.posts.totalPages,
+    ...mapState("state.posts", {
+      posts: (state) => state.posts,
+      isPostsLoading: (state) => state.isPostsLoading,
+      selectedSort: (state) => state.selectedSort,
+      sortOptions: (state) => state.sortOptions,
+      searchQuery: (state) => state.searchQuery,
+      page: (state) => state.page,
+      limit: (state) => state.limit,
+      totalPages: (state) => state.totalPages,
     }),
-    ...mapGetters({
-      sortedPosts: "posts/sortedPosts",
-      sortedSearchedPosts: "posts/sortedSearchedPosts",
-    }),
+    ...mapGetters("posts", ["sortedPosts", "sortedSearchedPosts"]),
   },
   mounted() {
     this.fetchPosts();
